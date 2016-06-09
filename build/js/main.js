@@ -35,6 +35,16 @@ fireworksEasterEgg.code = fireworksLoad;
 fireworksEasterEgg.load();
 
 jQuery( function( $ ) {
+    
+    $( document ).ready( function() {
+        
+        setInterval( function() {
+        
+            $( '.countdown-overlay .countdown' ).text( countdown( new Date( Date.UTC( 2016, 5, 14, 21, 0, 0 ) ) ) );
+            
+        }, 1000 );
+        
+    } );
 
     // update mouse position, used for some rocket calculation
     $( document ).mousemove( function( e ) {

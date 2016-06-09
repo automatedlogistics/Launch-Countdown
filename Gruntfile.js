@@ -65,6 +65,7 @@ module.exports = function (grunt) {
                 files: {
                     'script.js': [
                         // Vendor files
+                        'build/vendor/js/countdown.min.js',
                         'build/vendor/js/konami.js',
                         // Plugin scripts
                         'build/js/**/*.js',

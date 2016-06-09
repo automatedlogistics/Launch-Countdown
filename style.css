@@ -1,3 +1,56 @@
+.admin-bar .countdown-overlay {
+  top: 32px; }
+
+@media screen and (max-width: 782px) {
+  .admin-bar .countdown-overlay {
+    top: 46px; } }
+
+.countdown-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  -webkit-transition: visibility 0s 0.5s;
+  transition: visibility 0s 0.5s;
+  z-index: 999; }
+  .countdown-overlay .overlay-contents {
+    position: relative;
+    text-align: center;
+    top: 45%;
+    width: 50%;
+    pointer-events: none;
+    margin: 0 auto;
+    height: 60%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    display: block;
+    -webkit-transition: color 0.2s;
+    transition: color 0.2s; }
+  .countdown-overlay.open {
+    visibility: visible;
+    -webkit-transition: none;
+    transition: none; }
+    .countdown-overlay.open * {
+      pointer-events: all; }
+  .countdown-overlay svg {
+    position: absolute;
+    top: 0;
+    left: 0; }
+  .countdown-overlay * {
+    -webkit-transition: opacity 0.4s 0.4s;
+    transition: opacity 0.4s 0.4s;
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s; }
+  .countdown-overlay.open * {
+    opacity: 1;
+    -webkit-transition-delay: 0.4s;
+    transition-delay: 0.4s; }
+  .countdown-overlay.close * {
+    opacity: 0;
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s; }
+
 #fireworks-display {
   position: fixed;
   top: 0;
