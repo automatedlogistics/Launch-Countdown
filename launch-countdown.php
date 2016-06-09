@@ -50,6 +50,12 @@ if ( ! class_exists( 'ALS_Countdown' ) ) {
          */
         private function setup_constants() {
             
+            // Plugin version
+            define( 'ALS_Countdown_VER', '1.0.0' );
+            
+            // Plugin version
+            define( 'ALS_Countdown_ID', 'alscountdown' );
+            
             // Plugin path
             define( 'ALS_Countdown_DIR', plugin_dir_path( __FILE__ ) );
             
@@ -64,6 +70,57 @@ if ( ! class_exists( 'ALS_Countdown' ) ) {
          * @return      void
          */
         private function hooks() {
+            
+            add_action( 'init', array( $this, 'register_scripts' ) );
+            add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_scripts' ) );
+            
+            add_action( 'wp_head', array( $this, 'pre_launch_overlay' ) );
+            
+        }
+        
+        /**
+         * Register Stylec/Scripts for later use
+         * @since       1.0.0
+         * @return      void
+         */
+        public function register_scripts() {
+            
+            wp_register_style(
+                ALS_Countdown_ID,
+                ALS_Countdown_URL . '/style.css',
+                null,
+                defined( 'WP_DEBUG' ) && WP_DEBUG ? time() : ALS_Countdown_VER
+            );
+            
+            wp_register_script(
+                ALS_Countdown_ID,
+                ALS_Countdown_URL . '/script.js',
+                array( 'jquery' ),
+                defined( 'WP_DEBUG' ) && WP_DEBUG ? time() : ALS_Countdown_VER,
+                true
+            );
+            
+        }
+        
+        /**
+         * Enqueue Stylec/Scripts for the frontend
+         * @since       1.0.0
+         * @return      void
+         */
+        public function enqueue_frontend_scripts() {
+            
+            wp_enqueue_style( ALS_Countdown_ID );
+            
+            wp_enqueue_script( ALS_Countdown_ID );
+            
+        }
+        
+        /**
+         * Inject Pre-Launch Overlay
+         * @since       1.0.0
+         * @return      void
+         */
+        public function pre_launch_overlay() {
             
             
             

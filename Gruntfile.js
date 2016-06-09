@@ -65,7 +65,7 @@ module.exports = function (grunt) {
                 files: {
                     'script.js': [
                         // Vendor files
-
+                        'build/vendor/js/konami.js',
                         // Plugin scripts
                         'build/js/**/*.js',
                         '!build/js/customizer/**/*.js',
