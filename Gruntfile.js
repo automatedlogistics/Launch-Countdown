@@ -14,20 +14,24 @@ module.exports = function (grunt) {
                 livereload: true
             },
             sass: {
-                files: ['build/sass/**/*.scss', '!build/sass/admin/**/*.scss'],
+                files: ['build/sass/**/*.scss', '!build/sass/admin/**/*.scss', '!build/sass/widget/controls/**/*.scss'],
                 tasks: ['sass:front', 'autoprefixer:front', 'notify:sass']
             },
+            sass_widget: {
+                files: ['build/sass/widget/controls/**/*.scss'],
+                tasks: ['sass:widget_controls', 'autoprefixer:widget_controls', 'notify:sass_widget']
+            },
             js: {
-                files: ['build/js/**/*.js', '!build/js/admin/**/*.js', '!build/js/customizer/**/*.js', '!build/js/tinymce/**/*.js', '!build/js/quick-edit/**/*.js'],
+                files: ['build/js/**/*.js', '!build/js/admin/**/*.js', '!build/js/widget/**/*.js'],
                 tasks: ['uglify:front', 'notify:js']
             },
             js_admin: {
                 files: ['build/js/admin/**/*.js'],
                 tasks: ['uglify:admin', 'notify:js_admin']
             },
-            js_customizer: {
-                files: ['build/js/customizer/**/*.js']  ,
-                tasks: ['uglify:customizer', 'notify:js_customizer']
+            js_widget: {
+                files: ['build/js/widget/**/*.js']  ,
+                tasks: ['uglify:widget', 'notify:js_widget']
             },
             livereload: {
                 files: ['**/*.html', '**/*.php', 'build/images/**/*.{png,jpg,jpeg,gif,webp,svg}', '!**/*ajax*.php']
@@ -44,6 +48,11 @@ module.exports = function (grunt) {
                     'style.css': 'build/sass/main.scss'
                 }
             },
+            widget_controls: {
+                files: {
+                    'widget-controls.css': 'build/sass/widget/controls/main.scss'
+                }
+            },
         },
 
         // Auto prefix our CSS with vendor prefixes
@@ -53,6 +62,9 @@ module.exports = function (grunt) {
             },
             front: {
                 src: 'style.css'
+            },
+            widget_controls: {
+                src: 'widget-controls.css'
             },
         },
 
@@ -69,7 +81,7 @@ module.exports = function (grunt) {
                         'build/vendor/js/konami.js',
                         // Plugin scripts
                         'build/js/**/*.js',
-                        '!build/js/customizer/**/*.js',
+                        '!build/js/widget/**/*.js',
                     ]
                 }
             },
@@ -80,13 +92,18 @@ module.exports = function (grunt) {
                     ]
                 }
             },
-            customizer: {
+            widget: {
                 files: {
-                    'customizer-controls.js': [
-                        'build/js/customizer/controls/**/*.js',
+                    'widget-controls.js': [
+                        // Vendor files
+                        'build/vendor/js/jquery.clockpicker.js',
+                        'build/vendor/js/picker.js',
+                        'build/vendor/js/picker.date.js',
+                        // Widget scripts
+                        'build/js/widget/controls/**/*.js',
                     ],
-                    'customizer-preview.js': [
-                        'build/js/customizer/preview/**/*.js',
+                    'widget-frontend.js': [
+                        'build/js/widget/front/**/*.js',
                     ]
                 }
             }
@@ -105,16 +122,22 @@ module.exports = function (grunt) {
                     message: 'JS Admin Complete'
                 }
             },
-            js_customizer: {
+            js_widget: {
                 options: {
                     title: '<%= pkg.name %>',
-                    message: 'JS Customizer Complete'
+                    message: 'JS Widget Complete'
                 }  
             },
             sass: {
                 options: {
                     title: '<%= pkg.name %>',
                     message: 'SASS Complete'
+                }
+            },
+            sass_widget: {
+                options: {
+                    title: '<%= pkg.name %>',
+                    message: 'SASS Widget Controls Complete'
                 }
             }
         }

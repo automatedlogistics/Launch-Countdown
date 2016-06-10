@@ -1,0 +1,9 @@
+.datepicker {
+    
+    &:hover {
+        cursor: pointer;
+    }
+    
+    background-color: #fff !important; // For some reason the field gains the Readonly attribute and makes things look weird
+    
+}

@@ -1,0 +1,31 @@
+.clockpicker {
+    
+    &:hover {
+        cursor: pointer;
+    }
+    
+}
+
+.clockpicker-popover {
+
+    z-index: 500000; // Yeah, I'm surprised too
+
+    .am-button {
+        float: left;
+    }
+    
+    .pm-button {
+        float: right;
+    }
+    
+    .clockpicker-am-pm-block {
+        
+        height: 1em;
+        
+        &:after {
+            clear: both;
+        }
+        
+    }
+
+}

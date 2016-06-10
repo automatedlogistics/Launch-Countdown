@@ -73,8 +73,10 @@ if ( ! class_exists( 'ALS_Countdown' ) ) {
 
             add_action( 'init', array( $this, 'register_scripts' ) );
             add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_scripts' ) );
+            add_action( 'customize_controls_enqueue_scripts', array( $this, 'enqueue_widget_control_scripts' ) );
             
             add_action( 'widgets_init', array( $this, 'register_sidebar' ) );
+            add_action( 'widgets_init', array( $this, 'include_widget' ) );
 
             add_action( 'wp_head', array( $this, 'pre_launch_overlay' ) );
 
@@ -101,6 +103,21 @@ if ( ! class_exists( 'ALS_Countdown' ) ) {
                 defined( 'WP_DEBUG' ) && WP_DEBUG ? time() : ALS_Countdown_VER,
                 true
             );
+            
+            wp_register_style(
+                ALS_Countdown_ID . '-widget-controls-css',
+                ALS_Countdown_URL . '/widget-controls.css',
+                null,
+                defined( 'WP_DEBUG' ) && WP_DEBUG ? time() : ALS_Countdown_VER
+            );
+            
+            wp_register_script(
+                ALS_Countdown_ID . '-widget-controls-js',
+                ALS_Countdown_URL . '/widget-controls.js',
+                array( 'jquery' ),
+                defined( 'WP_DEBUG' ) && WP_DEBUG ? time() : ALS_Countdown_VER,
+                false
+            );
 
         }
 
@@ -115,6 +132,14 @@ if ( ! class_exists( 'ALS_Countdown' ) ) {
 
             wp_enqueue_script( ALS_Countdown_ID );
 
+        }
+        
+        public function enqueue_widget_control_scripts() {
+            
+            wp_enqueue_style( ALS_Countdown_ID . '-widget-controls-css' );
+            
+            wp_enqueue_script( ALS_Countdown_ID . '-widget-controls-js' );
+            
         }
 
         /**
@@ -169,16 +194,10 @@ if ( ! class_exists( 'ALS_Countdown' ) ) {
         }
 
         /**
-         * Inject Pre-Launch Overlay
+         * Include basic Sidebar for our Overlay
          * @since       1.0.0
-         * @return      void
+         * @return       void
          */
-        public function pre_launch_overlay() {
-
-            $this->locate_template( 'overlay.php', true );
-
-        }
-
         public function register_sidebar() {
 
             register_sidebar( array(
@@ -186,6 +205,29 @@ if ( ! class_exists( 'ALS_Countdown' ) ) {
                 'id' => 'als-countdown-sidebar',
                 'description' => __( 'This is where we create our Countdown Sidebar.', ALS_Countdown_ID ),
             ) );
+
+        }
+        
+        /**
+         * Include our custom Widget
+         * @since       1.0.0
+         * @return      void
+         */
+        public function include_widget() {
+            
+            require_once( 'includes/widget-countdown.php' );
+            register_widget( 'ALS_Countdown_Widget' );
+            
+        }
+
+        /**
+         * Inject Pre-Launch Overlay
+         * @since       1.0.0
+         * @return      void
+         */
+        public function pre_launch_overlay() {
+
+            $this->locate_template( 'overlay.php', true );
 
         }
 
