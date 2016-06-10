@@ -77,12 +77,15 @@ module.exports = function (grunt) {
                 files: {
                     'script.js': [
                         // Vendor files
+                        'build/vendor/js/modernizr.min.js',
+                        'build/vendor/js/snap.svg-min.js',
                         'build/vendor/js/moment.min.js',
                         'build/vendor/js/moment-timezone-with-data.min.js',
                         'build/vendor/js/countdown.min.js',
                         'build/vendor/js/konami.js',
                         // Plugin scripts
                         'build/js/**/*.js',
+                        '!build/js/admin/**/*.js',
                         '!build/js/widget/**/*.js',
                     ]
                 }

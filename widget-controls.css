@@ -24,6 +24,7 @@
   border: 1px solid #ccc;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 6px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); }
 
 .popover.top {
@@ -65,12 +66,14 @@
   padding: 0;
   z-index: auto;
   background-color: transparent;
+  -webkit-box-shadow: none;
   box-shadow: none;
   bottom: auto;
   left: auto;
   right: auto;
   top: auto;
   -webkit-transform: none;
+  -ms-transform: none;
   transform: none; }
 
 .popover > .arrow {
@@ -165,6 +168,7 @@
 .btn.active {
   background-image: none;
   outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125); }
 
 .btn-default {
@@ -297,6 +301,9 @@
 
 .clockpicker-dial {
   -webkit-transition: -webkit-transform 350ms, opacity 350ms;
+  -moz-transition: -moz-transform 350ms, opacity 350ms;
+  -ms-transition: -ms-transform 350ms, opacity 350ms;
+  -o-transition: -o-transform 350ms, opacity 350ms;
   transition: transform 350ms, opacity 350ms; }
 
 .clockpicker-dial-out {
@@ -304,14 +311,23 @@
 
 .clockpicker-hours.clockpicker-dial-out {
   -webkit-transform: scale(1.2, 1.2);
+  -moz-transform: scale(1.2, 1.2);
+  -ms-transform: scale(1.2, 1.2);
+  -o-transform: scale(1.2, 1.2);
   transform: scale(1.2, 1.2); }
 
 .clockpicker-minutes.clockpicker-dial-out {
   -webkit-transform: scale(0.8, 0.8);
+  -moz-transform: scale(0.8, 0.8);
+  -ms-transform: scale(0.8, 0.8);
+  -o-transform: scale(0.8, 0.8);
   transform: scale(0.8, 0.8); }
 
 .clockpicker-canvas {
   -webkit-transition: opacity 175ms;
+  -moz-transition: opacity 175ms;
+  -ms-transition: opacity 175ms;
+  -o-transition: opacity 175ms;
   transition: opacity 175ms; }
 
 .clockpicker-canvas-out {
@@ -415,8 +431,7 @@
   opacity: 0;
   -webkit-transform: translateY(-1em) perspective(600px) rotateX(10deg);
   transform: translateY(-1em) perspective(600px) rotateX(10deg);
-  -webkit-transition: -webkit-transform 0.15s ease-out, opacity 0.15s ease-out, max-height 0s 0.15s, border-width 0s 0.15s;
-          transition: -webkit-transform 0.15s ease-out, opacity 0.15s ease-out, max-height 0s 0.15s, border-width 0s 0.15s;
+  transition: -webkit-transform 0.15s ease-out, opacity 0.15s ease-out, max-height 0s 0.15s, border-width 0s 0.15s;
   transition: transform 0.15s ease-out, opacity 0.15s ease-out, max-height 0s 0.15s, border-width 0s 0.15s; }
 
 /**
@@ -442,8 +457,7 @@
   border-bottom-width: 1px;
   -webkit-transform: translateY(0) perspective(600px) rotateX(0);
   transform: translateY(0) perspective(600px) rotateX(0);
-  -webkit-transition: -webkit-transform 0.15s ease-out, opacity 0.15s ease-out, max-height 0s, border-width 0s;
-          transition: -webkit-transform 0.15s ease-out, opacity 0.15s ease-out, max-height 0s, border-width 0s;
+  transition: -webkit-transform 0.15s ease-out, opacity 0.15s ease-out, max-height 0s, border-width 0s;
   transition: transform 0.15s ease-out, opacity 0.15s ease-out, max-height 0s, border-width 0s;
   box-shadow: 0 6px 18px 1px rgba(0, 0, 0, 0.12); }
 
@@ -759,4 +773,5 @@
   background-color: #fff !important; }
   .datepicker:hover {
     cursor: pointer; }
+
 /*# sourceMappingURL=widget-controls.css.map */
