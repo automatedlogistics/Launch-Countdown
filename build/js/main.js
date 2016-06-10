@@ -38,11 +38,53 @@ jQuery( function( $ ) {
     
     $( document ).ready( function() {
         
-        setInterval( function() {
-        
-            $( '.countdown-overlay .countdown' ).text( countdown( new Date( Date.UTC( 2016, 5, 14, 21, 0, 0 ) ) ) );
+        if ( $( '.countdown-container' ).length > 0 ) {
             
-        }, 1000 );
+            var date = $( '.countdown-container' ).data( 'date' ),
+                time = $( '.countdown-container' ).data( 'time' ),
+                targetTimezone = $( '.countdown-container' ).data( 'timezone' );
+            
+            var hours,
+                minutes;
+            
+            if ( time.toLowerCase().indexOf( 'pm' ) ) {
+                
+                time = time.replace( /pm/i, '' ).trim().split( ':' );
+                
+                hours = parseInt( time[0] );
+                minutes = parseInt( time[1] );
+                
+                if ( hours !== 12 ) {
+                
+                    hours = hours + 12;
+
+                }
+                
+            }
+            else {
+                
+                time = time.replace( /am/i, '' ).trim().split( ':' );
+                
+                hours = parseInt( time[0] );
+                minutes = parseInt( time[1] );
+                
+            }
+            
+            date = date.split( '/' );
+            
+            var month = parseInt( date[0] ) - 1, // JavaScript date 0 indexes the month
+                day = parseInt( date[1] ),
+                year = parseInt( date[2] );
+            
+            var offsetTimes = getTimezoneAdjustedDateTime( year, month, day, hours, minutes, targetTimezone );
+        
+            setInterval( function() {
+
+                $( '.countdown-container .countdown' ).text( countdown( new Date( Date.UTC( offsetTimes.year, offsetTimes.month, offsetTimes.day, offsetTimes.hours, offsetTimes.minutes, 0 ) ) ) );
+
+            }, 1000 );
+            
+        }
         
     } );
 

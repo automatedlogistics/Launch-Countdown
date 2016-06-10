@@ -30,7 +30,7 @@ module.exports = function (grunt) {
                 tasks: ['uglify:admin', 'notify:js_admin']
             },
             js_widget: {
-                files: ['build/js/widget/**/*.js']  ,
+                files: ['build/js/widget/**/*.js'],
                 tasks: ['uglify:widget', 'notify:js_widget']
             },
             livereload: {
@@ -77,6 +77,8 @@ module.exports = function (grunt) {
                 files: {
                     'script.js': [
                         // Vendor files
+                        'build/vendor/js/moment.min.js',
+                        'build/vendor/js/moment-timezone-with-data.min.js',
                         'build/vendor/js/countdown.min.js',
                         'build/vendor/js/konami.js',
                         // Plugin scripts

@@ -75,6 +75,14 @@ if ( ! class_exists( 'ALS_Countdown_Widget' ) ) {
             if ( ! empty( $instance['title'] ) ) {
                 echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
             }
+            
+            ?>
+
+                <div class="countdown-container" data-date="<?php echo $instance['date']; ?>" data-time="<?php echo $instance['time']; ?>" data-timezone="<?php echo $instance['timezone']; ?>">
+                    <div class="countdown"></div>
+                </div>
+            
+            <?php
 
             echo $args['after_widget'];
 

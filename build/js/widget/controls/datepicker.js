@@ -9,7 +9,7 @@ jQuery( document ).ready( function( $ ) {
             $( element ).not( '*[id*="__i__"]' ).on( 'click', function() { // Go figure, twelvehour clock is pretty broken. No wonder it isn't in the Docs~
 
                 $( element ).pickadate( {
-                    format: 'mm/dd/yy',
+                    format: 'mm/dd/yyyy',
                 } );
 
             } );
