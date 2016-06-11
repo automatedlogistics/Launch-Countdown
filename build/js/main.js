@@ -84,13 +84,6 @@ jQuery( function( $ ) {
 
     }
 
-    function doTheThing() {
-
-        toggleCountdownOverlay();
-        fireworksLoad();
-
-    }
-
     $( document ).ready( function() {
 
         if ( $( '.countdown-container' ).length > 0 ) {
@@ -102,7 +95,7 @@ jQuery( function( $ ) {
             var hours,
                 minutes;
 
-            if ( time.toLowerCase().indexOf( 'pm' ) ) {
+            if ( time.toLowerCase().indexOf( 'pm' ) !== -1 ) {
 
                 time = time.replace( /pm/i, '' ).trim().split( ':' );
 
@@ -133,28 +126,41 @@ jQuery( function( $ ) {
 
             var offsetTimes = getTimezoneAdjustedDateTime( year, month, day, hours, minutes, targetTimezone );
 
-            new Countdown();
-
             var countdown = new Countdown( {
-                selector: '.countdown-container .countdown',
+                selector: '.countdown',
+                leadingZeros: true,
                 msgAfter: '',
                 msgPattern: "{days}:{hours}:{minutes}:{seconds}",
                 dateEnd: new Date( Date.UTC( offsetTimes.year, offsetTimes.month, offsetTimes.day, offsetTimes.hours, offsetTimes.minutes, 0 ) ),
             } );
+            
+            var fireworksDuration = new Countdown( {
+                selector: '.fireworks-countdown',
+                leadingZeros: true,
+                msgBefore: '',
+                msgAfter: '',
+                msgPattern: '',
+                dateStart: new Date( Date.UTC( offsetTimes.year, offsetTimes.month, offsetTimes.day, offsetTimes.hours, offsetTimes.minutes, 0 ) ),
+                dateEnd: new Date( Date.UTC( offsetTimes.year, offsetTimes.month, offsetTimes.day, offsetTimes.hours, offsetTimes.minutes + 5, 0 ) ),
+            } );
 
-            $( '.countdown-container .countdown' ).on( 'countdownEnd', function() {
-                doTheThing();
+            $( '.countdown-container .countdown' ).on( 'countdownStart', function() {
+                toggleCountdownOverlay();
             } );
             
-            toggleCountdownOverlay();
-
-            $( document ).on( 'keyup', function( event ) {
-
-                if ( event.keyCode == 27 ) { 
-                    doTheThing();
-                }
-
+            $( '.countdown-container .countdown' ).on( 'countdownEnd', function() {
+                toggleCountdownOverlay();
             } );
+            
+            $( '.countdown-container .fireworks-countdown' ).on( 'countdownStart', function() {
+                fireworksLoad();
+            } );
+            
+            $( '.countdown-container .fireworks-countdown' ).on( 'countdownEnd', function() {
+                $( '#fireworks-display' ).remove();
+            } );
+            
+            //toggleCountdownOverlay();
 
         }
 

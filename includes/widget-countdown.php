@@ -80,6 +80,7 @@ if ( ! class_exists( 'ALS_Countdown_Widget' ) ) {
 
                 <div class="countdown-container" data-date="<?php echo $instance['date']; ?>" data-time="<?php echo $instance['time']; ?>" data-timezone="<?php echo $instance['timezone']; ?>">
                     <div class="countdown"></div>
+                    <div class="fireworks-countdown"></div>
                 </div>
             
             <?php

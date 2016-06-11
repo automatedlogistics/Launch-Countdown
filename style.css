@@ -11,8 +11,6 @@
   height: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(0, 87, 144, 0.9);
-  background: transparent;
   visibility: hidden;
   -webkit-transition: visibility 0s 0.5s;
   transition: visibility 0s 0.5s;
@@ -30,8 +28,6 @@
     display: block;
     -webkit-transition: color 0.2s;
     transition: color 0.2s; }
-  #countdown-overlay .overlay-path {
-    fill: rgba(0, 87, 144, 0.9); }
   #countdown-overlay.open {
     visibility: visible;
     -webkit-transition: none;
