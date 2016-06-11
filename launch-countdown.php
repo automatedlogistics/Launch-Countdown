@@ -226,8 +226,13 @@ if ( ! class_exists( 'ALS_Countdown' ) ) {
          * @return      void
          */
         public function pre_launch_overlay() {
+            
+            // Generally only Admins have this Capability
+            if ( ! current_user_can( 'manage_options' ) ) {
 
-            $this->locate_template( 'overlay.php', true );
+                $this->locate_template( 'overlay.php', true );
+                
+            }
 
         }
 

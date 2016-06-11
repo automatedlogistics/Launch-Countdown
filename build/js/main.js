@@ -23,12 +23,6 @@ var fireworksLoad = function() {
     canvas.width = SCREEN_WIDTH;
     canvas.height = SCREEN_HEIGHT;
 
-    //jQuery( function( $ ) {
-
-
-
-    //} );
-
     setInterval( launch, 800 );
     setInterval( loop, 1000 / 50 );
 
@@ -43,24 +37,27 @@ fireworksEasterEgg.load();
 
 jQuery( function( $ ) {
 
-    var countdownOverlay = document.getElementById( 'countdown-overlay' ),
-        transEndEventNames = {
-            'WebkitTransition': 'webkitTransitionEnd',
-            'MozTransition': 'transitionend',
-            'OTransition': 'oTransitionEnd',
-            'msTransition': 'MSTransitionEnd',
-            'transition': 'transitionend'
-        },
-        transEndEventName = transEndEventNames[ Modernizr.prefixed( 'transition' ) ],
-        support = { transitions : Modernizr.csstransitions },
-        countdownSVG = Snap( countdownOverlay.querySelector( 'svg' ) ),
-        countdownPath = countdownSVG.select( 'path' ),
-        countdownPathConfig = {
-            from : countdownPath.attr( 'd' ),
-            to : countdownOverlay.getAttribute( 'data-path-to' )
-        };
+    var countdownOverlay = document.getElementById( 'countdown-overlay' );
     
-    //$( countdownOverlay ).addClass( 'open' );
+    if ( countdownOverlay !== null ) {
+    
+        var transEndEventNames = {
+                'WebkitTransition': 'webkitTransitionEnd',
+                'MozTransition': 'transitionend',
+                'OTransition': 'oTransitionEnd',
+                'msTransition': 'MSTransitionEnd',
+                'transition': 'transitionend'
+            },
+            transEndEventName = transEndEventNames[ Modernizr.prefixed( 'transition' ) ],
+            support = { transitions : Modernizr.csstransitions },
+            countdownSVG = Snap( countdownOverlay.querySelector( 'svg' ) ),
+            countdownPath = countdownSVG.select( 'path' ),
+            countdownPathConfig = {
+                from : countdownPath.attr( 'd' ),
+                to : countdownOverlay.getAttribute( 'data-path-to' )
+            };
+        
+    }
     
     function toggleCountdownOverlay() {
 
@@ -159,8 +156,6 @@ jQuery( function( $ ) {
             $( '.countdown-container .fireworks-countdown' ).on( 'countdownEnd', function() {
                 $( '#fireworks-display' ).remove();
             } );
-            
-            //toggleCountdownOverlay();
 
         }
 
