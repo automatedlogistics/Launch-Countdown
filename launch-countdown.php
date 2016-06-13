@@ -228,7 +228,8 @@ if ( ! class_exists( 'ALS_Countdown' ) ) {
         public function pre_launch_overlay() {
             
             // Generally only Admins have this Capability
-            if ( ! current_user_can( 'manage_options' ) ) {
+            // Retains the ability to load on the backend
+            if ( ! current_user_can( 'manage_options' ) || is_admin() || is_customize_preview() ) {
 
                 $this->locate_template( 'overlay.php', true );
                 

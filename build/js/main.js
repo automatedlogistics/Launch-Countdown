@@ -72,6 +72,7 @@ jQuery( function( $ ) {
             countdownPath.animate( { 'path' : countdownPathConfig.from }, 400, mina.linear, onEndTransitionFn );
         }
         else {
+            $( '#countdown-overlay-previous' ).css( 'visibility', 'hidden' );
             $( countdownOverlay ).addClass( 'open' );
             $( countdownOverlay ).removeClass( 'close' );
             countdownPath.animate( { 'path' : countdownPathConfig.to }, 0, mina.linear );
@@ -122,6 +123,14 @@ jQuery( function( $ ) {
                 year = parseInt( date[2] );
 
             var offsetTimes = getTimezoneAdjustedDateTime( year, month, day, hours, minutes, targetTimezone );
+            
+            var fireworksEnd = new Date( Date.UTC( offsetTimes.year, offsetTimes.month, offsetTimes.day, offsetTimes.hours, offsetTimes.minutes + 5, 0 ) ).getTime() / 1000;
+            
+            var now = new Date().getTime() / 1000;
+            
+            if ( ( fireworksEnd - now ) <= 0 ) {
+                $( '#countdown-overlay-previous' ).css( 'visibility', 'hidden' );
+            }
 
             var countdown = new Countdown( {
                 selector: '.countdown',
@@ -150,6 +159,7 @@ jQuery( function( $ ) {
             } );
             
             $( '.countdown-container .fireworks-countdown' ).on( 'countdownStart', function() {
+                $( '#countdown-overlay-previous' ).css( 'visibility', 'hidden' );
                 fireworksLoad();
             } );
             
