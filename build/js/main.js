@@ -72,8 +72,10 @@ jQuery( function( $ ) {
             countdownPath.animate( { 'path' : countdownPathConfig.from }, 400, mina.linear, onEndTransitionFn );
         }
         else {
-            $( '#countdown-overlay-previous' ).css( 'visibility', 'hidden' );
-            $( countdownOverlay ).addClass( 'open' );
+            setTimeout( function() {
+                $( countdownOverlay ).addClass( 'open' );
+                $( '#countdown-overlay-previous' ).css( 'visibility', 'hidden' );
+            }, 0 ); // Take that, single-threaded JavaScript
             $( countdownOverlay ).removeClass( 'close' );
             countdownPath.animate( { 'path' : countdownPathConfig.to }, 0, mina.linear );
             

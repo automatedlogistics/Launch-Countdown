@@ -29,6 +29,9 @@
     top: 0;
     left: 0;
     z-index: 999;
+    -webkit-transition: 0s 0s ease-out visibility;
+    transition: 0s 0s ease-out visibility;
+    //transition-delay: 0.00000000000000000005s;
 }
 
 #countdown-overlay {
